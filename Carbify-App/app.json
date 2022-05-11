@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Carbify-App",
+    "slug": "Carbify-App",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
