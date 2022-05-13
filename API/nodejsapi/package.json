@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +25,8 @@
     "passport-jwt": "^4.0.0",
     "sendinblue-apiv3": "^2.0.2",
     "sib-api-v3-sdk": "^8.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }
