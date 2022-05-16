@@ -9,8 +9,13 @@ function HomeScreen({ navigation }) {
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Home Screen</Text>
       <Button
+<<<<<<< HEAD
         title="Go to Scan"
         onPress={() => navigation.navigate("ScanScreen")}
+=======
+        title="Go to Details"
+        onPress={() => navigation.navigate("Home")}
+>>>>>>> 9470e767d6407f217200d43d3791804c23df919c
       />
     </View>
   );
@@ -23,7 +28,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
+<<<<<<< HEAD
         <Stack.Screen name="ScanScreen" component={ScanScreen} />
+=======
+        <Stack.Screen name="Details" component={Home} />
+>>>>>>> 9470e767d6407f217200d43d3791804c23df919c
       </Stack.Navigator>
     </NavigationContainer>
   );
