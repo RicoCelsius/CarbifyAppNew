@@ -2,6 +2,8 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ScanScreen from "./screens/ScanScreen.js";
+import Registration from "./screens/Registration.js";
+import { render } from "react-dom";
 
 function HomeScreen({ navigation }) {
   return (
@@ -10,6 +12,10 @@ function HomeScreen({ navigation }) {
       <Button
         title="Go to Scan"
         onPress={() => navigation.navigate("ScanScreen")}
+      />
+      <Button
+        title="Go to Regisration"
+        onPress={() => navigation.navigate("Registration")}
       />
     </View>
   );
@@ -23,6 +29,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="ScanScreen" component={ScanScreen} />
+        <Stack.Screen name="Register here" component={Registration} />
       </Stack.Navigator>
     </NavigationContainer>
   );
