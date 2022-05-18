@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-mysql-express-rest-api",
+  "version": "1.0.0",
+  "description": "nodejs mysql express rest api crud example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "mysql",
+    "express",
+    "restapi",
+    "crud"
+  ],
+  "author": "onlyxcodes",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15"
+  }
+}
