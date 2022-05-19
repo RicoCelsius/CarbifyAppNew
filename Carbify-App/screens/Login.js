@@ -1,5 +1,4 @@
 //import libraries
-import React from "react";
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -9,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default class App extends React.Component {
+export default class Login extends React.Component {
   state = {
     email: "",
     password: "",
