@@ -46,6 +46,11 @@ buck-out/
 # Bundle artifacts
 *.jsbundle
 
+package-lock.json
+package.json
+yarn.lock
+
+
 # CocoaPods
 /ios/Pods/
 
