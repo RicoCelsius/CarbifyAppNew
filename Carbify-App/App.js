@@ -14,7 +14,7 @@ function HomeScreen({ navigation }) {
         onPress={() => navigation.navigate("ScanScreen")}
       />
       <Button
-        title="Go to Regisration"
+        title="Go to Registration"
         onPress={() => navigation.navigate("Registration")}
       />
     </View>
