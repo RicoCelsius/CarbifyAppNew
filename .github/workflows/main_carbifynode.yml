@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'CarbifyNode'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2F120B30DAFD4ABC9701D77074C30498 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1CF6247CD0D14D9A9546D7288841E92F }}
           package: .
