@@ -2,6 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button, TextInput, Image } from "react-native";
 import { useEffect, useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import News from "./News.js"
+
 //import Camera from "./screens/Camera.js";
 
 export default function ScanScreen() {
@@ -71,7 +73,7 @@ export default function ScanScreen() {
             marginBottom: 10,
           }}
         />
-        <Button title="Open camera" onPress={() => askPermissions()} />
+        <Button title="Open camera" onPress={() => News()} />
         <StatusBar style="auto" />
       </View>
     </View>
