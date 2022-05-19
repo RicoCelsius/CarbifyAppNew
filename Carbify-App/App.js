@@ -6,6 +6,10 @@ import Login  from "./screens/Login.js";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import News from './screens/News.js'
+import ScanScreen from "./screens/ScanScreen.js";
+import Registration from "./screens/Registration.js";
+import { render } from "react-dom";
+
 function HomeScreen({ navigation }) {
   return (
     
@@ -14,6 +18,10 @@ function HomeScreen({ navigation }) {
       <Button
         title="Go to Scan"
         onPress={() => navigation.navigate("ScanScreen")}
+      />
+      <Button
+        title="Go to Regisration"
+        onPress={() => navigation.navigate("Registration")}
       />
     </View>
   );
@@ -62,10 +70,14 @@ export default function App() {
           ),
         }} />
       </Tab.Navigator>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="ScanScreen" component={ScanScreen} />
+        <Stack.Screen name="Register here" component={Registration} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
