@@ -1,17 +1,52 @@
 //import libraries
-import React, { useState, useEffect } from "react";
+import React from "react";
+import bcrypt from "bcryptjs";
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
+  Button,
   TouchableOpacity,
 } from "react-native";
 
-export default class Login extends React.Component {
+export default class Registration extends React.Component {
   state = {
+    userName: "",
     email: "",
     password: "",
+  };
+
+  registerData = async () => {
+    response = fetch("http://3.72.226.236:7000/getmail/:mail", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+
+    if (JSON.stringify({}) == JSON.stringify(response)) {
+      console.log("test");
+    } //moet nog aan gewerkt worden
+
+    const hashedPassword = bcrypt.hashSync(
+      this.state.password,
+      "$2a$10$CwTycUXWue0Thq9StjUM0u" //SALT, nodig voor encryption.. even uitzoeken hoe dit werkt met inloggen..
+    );
+    fetch("http://3.72.226.236:7000/create", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: this.state.userName,
+        email: this.state.email,
+        password: hashedPassword,
+      }),
+    });
   };
 
   render() {
@@ -21,28 +56,32 @@ export default class Login extends React.Component {
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            placeholder="Email..."
+            placeholder="Your email"
             placeholderTextColor="#003f5c"
             onChangeText={(text) => this.setState({ email: text })}
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
+            style={styles.inputText}
+            placeholder="Username"
+            placeholderTextColor="#003f5c"
+            onChangeText={(text) => this.setState({ userName: text })}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
             secureTextEntry
             style={styles.inputText}
-            placeholder="Password..."
+            placeholder="Password"
             placeholderTextColor="#003f5c"
             onChangeText={(text) => this.setState({ password: text })}
           />
         </View>
-        <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.loginText}>Signup</Text>
+        <TouchableOpacity style={styles.loginBtn} onPress={this.registerData}>
+          <Text style={styles.loginText} onPress={this.registerData}>
+            Register
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -61,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: "#fb5b5a",
     marginBottom: 40,
-    fontFamily: "Merriweather",
+    fontFamily: "",
   },
   inputView: {
     width: "80%",
