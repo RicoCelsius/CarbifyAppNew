@@ -8,7 +8,14 @@ const mysql = require('mysql');
 //     ssl: true
 // });
 
-const connection=mysql.createConnection({host:"carbifyfontys.mysql.database.azure.com", user:"EnzoKnol", password:"KnolPower!", database:"users", port:3306, ssl:{ca:fs.readFileSync("DigiCertGlobalRootCA.crt.pem")}});
+const connection=mysql.createConnection({
+    host:"carbifyfontys.mysql.database.azure.com",
+    user:"EnzoKnol",
+    password:"KnolPower!",
+    database:"users",
+    port:3306,
+    ssl:{ca:fs.readFileSync("DigiCertGlobalRootCA.crt.pem")}
+});
 
 connection.connect((error) => {
     if(error){

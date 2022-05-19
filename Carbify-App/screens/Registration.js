@@ -25,13 +25,15 @@ export default class Registration extends React.Component {
         "Content-Type": "application/json",
       },
     });
+    console.log(response);
+
     if (JSON.stringify({}) == JSON.stringify(response)) {
       console.log("test");
     } //moet nog aan gewerkt worden
 
     const hashedPassword = bcrypt.hashSync(
       this.state.password,
-      "$2a$10$CwTycUXWue0Thq9StjUM0u"
+      "$2a$10$CwTycUXWue0Thq9StjUM0u" //SALT, nodig voor encryption.. even uitzoeken hoe dit werkt met inloggen..
     );
     fetch("http://3.72.226.236:7000/create", {
       method: "POST",

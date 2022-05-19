@@ -6,9 +6,19 @@ const app = express();
 app.use(express.json());
 
 app.get('/getall', (req, res) => {
-    connection.query('SELECT * FROM users', (error, result) => {
+    connection.query('SELECT id, name, email, password FROM users', (error, result) => {
         if (error) {
             res.send('error to fetch student all records')
+        } else {
+            res.send(result)
+        }
+    })
+});
+
+app.get('/getmail', (req, res) => {
+    connection.query('SELECT email, name FROM users WHERE email = ? or name = ?', [req.body.email, req.body.name], (error, result) => {
+        if (error) {
+            res.send('error to fetch email records')
         } else {
             res.send(result)
         }
@@ -25,8 +35,8 @@ app.post('/create', (req, res) => {
 })
 
 app.put('/update/:id', (req, res) => {
-    const data = [req.body.firstname, req.body.lastname, req.body.roll_number, req.params.id];
-    connection.query('UPDATE student SET firstname = ?, lastname = ?, roll_number = ? WHERE id = ?', data, (error, result, fields) => {
+    const data = [req.body.name, req.body.password, req.body.email, req.params.id];
+    connection.query('UPDATE users SET name = ?, password = ?, email = ? WHERE id = ?', data, (error, result, fields) => {
         if (error) throw error;
         res.send(result);
     })
