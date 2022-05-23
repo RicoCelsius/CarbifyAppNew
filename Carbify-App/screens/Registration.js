@@ -17,25 +17,35 @@ export default class Registration extends React.Component {
     password: "",
   };
 
-  registerData = async () => {
-    response = fetch("http://3.72.226.236:7000/getmail/:mail", {
-      method: "GET",
+  checkMail = async () => {
+    const response = await fetch("http://18.133.222.150:7000/getmail", {
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        email: this.state.email,
+        name: this.state.userName,
+      }),
     });
-    console.log(response);
+    let data = await response.json();
+    if (JSON.stringify(data) == '[]') {
+      this.registerData();
+      console.log(JSON.stringify(data));
+    }
+    else {
+      alert("Email or username already exists");
+      console.log(JSON.stringify(data));
+    }
+  };
 
-    if (JSON.stringify({}) == JSON.stringify(response)) {
-      console.log("test");
-    } //moet nog aan gewerkt worden
-
+  registerData = async () => {
     const hashedPassword = bcrypt.hashSync(
       this.state.password,
       "$2a$10$CwTycUXWue0Thq9StjUM0u" //SALT, nodig voor encryption.. even uitzoeken hoe dit werkt met inloggen..
     );
-    fetch("http://3.72.226.236:7000/create", {
+    await fetch("http://18.133.222.150:7000/create", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -78,8 +88,8 @@ export default class Registration extends React.Component {
             onChangeText={(text) => this.setState({ password: text })}
           />
         </View>
-        <TouchableOpacity style={styles.loginBtn} onPress={this.registerData}>
-          <Text style={styles.loginText} onPress={this.registerData}>
+        <TouchableOpacity style={styles.loginBtn} onPress={this.checkMail}>
+          <Text style={styles.loginText} onPress={this.checkMail}>
             Register
           </Text>
         </TouchableOpacity>
