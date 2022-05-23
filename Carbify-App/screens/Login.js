@@ -33,8 +33,6 @@ export default class Login extends React.Component {
         password: hashedPassword,
       }),
     });
-
-    console.log(hashedPassword);
     let data = await response.json();
     if (JSON.stringify(data) != '[]') {
       alert("Login succesful");
