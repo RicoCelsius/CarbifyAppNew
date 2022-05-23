@@ -15,7 +15,7 @@ app.get('/getall', (req, res) => {
     })
 });
 
-app.get('/getmail', (req, res) => {
+app.post('/getmail', (req, res) => {
     connection.query('SELECT email, name FROM users WHERE email = ? or name = ?', [req.body.email, req.body.name], (error, result) => {
         if (error) {
             res.send('error to fetch email records')
@@ -49,5 +49,7 @@ app.put('/update/:id', (req, res) => {
 //         res.send(result);
 //     });
 // });
+
+console.log("Server is running on port 7000" + app.);
 
 app.listen(7000);
