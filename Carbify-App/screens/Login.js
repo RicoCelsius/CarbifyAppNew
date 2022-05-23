@@ -14,6 +14,26 @@ export default class Login extends React.Component {
     password: "",
   };
 
+  login = async () => {
+    let hashedPassword = bcrypt.hashSync(
+      this.state.password,
+      "$2a$10$CwTycUXWue0Thq9StjUM0u" //SALT, nodig voor encryption.. even uitzoeken hoe dit werkt met inloggen..
+    );
+
+    response = fetch("http://3.72.226.236:7000/getmail/", {
+      //Aanpassen voor login API
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: this.state.userName,
+        password: hashedPassword,
+      }),
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -61,7 +81,6 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: "#fb5b5a",
     marginBottom: 40,
-    fontFamily: "Merriweather",
   },
   inputView: {
     width: "80%",

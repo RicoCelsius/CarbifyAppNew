@@ -11,16 +11,15 @@ export default function ScanScreen() {
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("Not yet scanned");
 
-  useEffect(() => {
-    askPermissions();
-  }, []);
+  // useEffect(() => {
+  //   askPermissions();
+  // }, []);
 
   const askPermissions = () => {
     (async () => {
       console.log("Asking for permissions");
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status == "granted");
-      openCamera();
     })();
   };
 
@@ -28,19 +27,16 @@ export default function ScanScreen() {
     setScanned(true);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
-
-  function openCamera() {
-    if (hasPermission === true) {
-      console.log("Camera opened, permission true");
-      return (
-        <View>
-          <BarCodeScanner
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-            style={{ height: 400, width: 400 }}
-          />
-        </View>
-      );
-    }
+  if (hasPermission && hasPermission) {
+    console.log("Camera opened, permission true");
+    return (
+      <View>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={{ height: 400, width: 400 }}
+        />
+      </View>
+    );
   }
 
   return (
@@ -73,7 +69,7 @@ export default function ScanScreen() {
             marginBottom: 10,
           }}
         />
-        <Button title="Open camera" onPress={() => News()} />
+        <Button title="Open camera" onPress={askPermissions} />
         <StatusBar style="auto" />
       </View>
     </View>
