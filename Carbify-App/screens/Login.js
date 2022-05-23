@@ -20,9 +20,9 @@ export default class Login extends React.Component {
       "$2a$10$CwTycUXWue0Thq9StjUM0u" //SALT, nodig voor encryption.. even uitzoeken hoe dit werkt met inloggen..
     );
 
-    response = fetch("http://3.72.226.236:7000/getmail/", {
+    response = await fetch("http://18.133.222.150:7000/login", {
       //Aanpassen voor login API
-      method: "POST",
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -32,6 +32,11 @@ export default class Login extends React.Component {
         password: hashedPassword,
       }),
     });
+    let data = await response.json();
+
+    if (JSON.stringify(response) == "") {
+      alert(`Welcome ${this.state.name}`);
+    } else alert("Invalid username and/or password");
   };
 
   render() {

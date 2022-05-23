@@ -26,8 +26,9 @@ export default function ScanScreen() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    setScanned(false);
   };
-  if (hasPermission && hasPermission) {
+  if (hasPermission) {
     console.log("Camera opened, permission true");
     return (
       <View>

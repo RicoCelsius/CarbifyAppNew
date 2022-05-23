@@ -18,6 +18,9 @@ export default class Registration extends React.Component {
   };
 
   checkMail = async () => {
+    if (/^[A-Za-z0-9 -]*$/.test(this.state.email)) {
+      console.log("test");
+    }
     const response = await fetch("http://18.133.222.150:7000/getmail", {
       method: "POST",
       headers: {
@@ -30,11 +33,11 @@ export default class Registration extends React.Component {
       }),
     });
     let data = await response.json();
-    if (JSON.stringify(data) == '[]') {
+    if (JSON.stringify(data) == "[]") {
       this.registerData();
       console.log(JSON.stringify(data));
-    }
-    else {
+      alert("Account has been created");
+    } else {
       alert("Email or username already exists");
       console.log(JSON.stringify(data));
     }
