@@ -15,6 +15,16 @@ app.get('/getall', (req, res) => {
     })
 });
 
+app.get('/login', (req, res) => {
+    connection.query('SELECT id, name FROM users WHERE name = ? AND password = ?', [req.body.name, req.body.password], (error, result) => {
+        if (error) {
+            res.send('error to fetch user')
+        } else {
+            res.send(result)
+        }
+    })
+});
+
 app.post('/getmail', (req, res) => {
     connection.query('SELECT email, name FROM users WHERE email = ? or name = ?', [req.body.email, req.body.name], (error, result) => {
         if (error) {
@@ -41,15 +51,5 @@ app.put('/update/:id', (req, res) => {
         res.send(result);
     })
 });
-
-// app.delete('/delete/:id', (req, res) => {
-//     const id = req.params.id;
-//     connection.query('DELETE FROM student WHERE id =' + id, (error, result) => {
-//         if (error) throw error;
-//         res.send(result);
-//     });
-// });
-
-console.log("Server is running on port 7000" + app.);
 
 app.listen(7000);

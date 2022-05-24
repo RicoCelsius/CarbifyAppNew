@@ -1,5 +1,6 @@
 //import libraries
 import React, { useState, useEffect } from "react";
+import bcrypt from "bcryptjs";
 import {
   StyleSheet,
   Text,
@@ -10,7 +11,7 @@ import {
 
 export default class Login extends React.Component {
   state = {
-    email: "",
+    userName: "",
     password: "",
   };
 
@@ -33,10 +34,11 @@ export default class Login extends React.Component {
       }),
     });
     let data = await response.json();
-
-    if (JSON.stringify(response) == "") {
-      alert(`Welcome ${this.state.name}`);
-    } else alert("Invalid username and/or password");
+    if (JSON.stringify(data) != "[]") {
+      alert("Login succesful");
+    } else {
+      alert("Login failed");
+    }
   };
 
   render() {
@@ -46,9 +48,9 @@ export default class Login extends React.Component {
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            placeholder="Email..."
+            placeholder="Username..."
             placeholderTextColor="#003f5c"
-            onChangeText={(text) => this.setState({ email: text })}
+            onChangeText={(text) => this.setState({ userName: text })}
           />
         </View>
         <View style={styles.inputView}>
@@ -63,8 +65,10 @@ export default class Login extends React.Component {
         <TouchableOpacity>
           <Text style={styles.forgot}>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>LOGIN</Text>
+        <TouchableOpacity style={styles.loginBtn} onPress={this.login}>
+          <Text style={styles.loginText} onPress={this.login}>
+            LOGIN
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity>
           <Text style={styles.loginText}>Signup</Text>
