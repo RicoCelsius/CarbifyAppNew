@@ -1,6 +1,8 @@
 //import libraries
 import React from "react";
 import bcrypt from "bcryptjs";
+import { Font, AppLoading } from "expo";
+
 import {
   StyleSheet,
   Text,
@@ -18,28 +20,34 @@ export default class Registration extends React.Component {
   };
 
   checkMail = async () => {
-    if (/^[A-Za-z0-9 -]*$/.test(this.state.email)) {
-      console.log("test");
-    }
-    const response = await fetch("http://18.133.222.150:7000/getmail", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        name: this.state.userName,
-      }),
-    });
-    let data = await response.json();
-    if (JSON.stringify(data) == "[]") {
-      this.registerData();
-      console.log(JSON.stringify(data));
-      alert("Account has been created");
+    const email = this.state.email;
+    if (/^[A-Za-z0-9.@-]*$/.test(email) != true || email == "")
+      alert("Invalid email");
+    else if (this.state.userName == "") {
+      alert("Invalid username");
+    } else if (this.state.password.length < 6) {
+      alert("Password must be six characters in length");
     } else {
-      alert("Email or username already exists");
-      console.log(JSON.stringify(data));
+      const response = await fetch("http://18.133.222.150:7000/getmail", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          name: this.state.userName,
+        }),
+      });
+      let data = await response.json();
+      if (JSON.stringify(data) == "[]") {
+        this.registerData();
+        console.log(JSON.stringify(data));
+        alert("Account has been created");
+      } else {
+        alert("Email or username already exists");
+        console.log(JSON.stringify(data));
+      }
     }
   };
 
@@ -104,20 +112,20 @@ export default class Registration extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#003f5c",
+    backgroundColor: "#56A5E0",
     alignItems: "center",
     justifyContent: "center",
   },
   logo: {
     fontWeight: "bold",
     fontSize: 50,
-    color: "#fb5b5a",
+    color: "#C6724E",
     marginBottom: 40,
-    fontFamily: "",
+    //fontFamily: "BebasNeue-Regular",
   },
   inputView: {
     width: "80%",
-    backgroundColor: "#465881",
+    backgroundColor: "#444442",
     borderRadius: 25,
     height: 50,
     marginBottom: 20,
@@ -134,7 +142,7 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     width: "80%",
-    backgroundColor: "#fb5b5a",
+    backgroundColor: "#C6724E",
     borderRadius: 25,
     height: 50,
     alignItems: "center",
