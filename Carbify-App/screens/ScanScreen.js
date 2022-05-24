@@ -25,8 +25,9 @@ export default function ScanScreen() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
+    console.log(data);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    setScanned(false);
+    sendData(`${data}`);
   };
   if (hasPermission) {
     console.log("Camera opened, permission true");
@@ -38,6 +39,22 @@ export default function ScanScreen() {
         />
       </View>
     );
+  }
+
+  async function sendData(barcodedata) {
+    const response = await fetch("http://18.133.222.150:7000/getbarcodeinfo", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        barcode: barcodedata,
+      }),
+    });
+    let data = await response.json();
+    console.log(data);
+    setScanned(false);
   }
 
   return (

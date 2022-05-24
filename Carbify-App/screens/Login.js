@@ -20,10 +20,9 @@ export default class Login extends React.Component {
       this.state.password,
       "$2a$10$CwTycUXWue0Thq9StjUM0u" //SALT, nodig voor encryption.. even uitzoeken hoe dit werkt met inloggen..
     );
-
     response = await fetch("http://18.133.222.150:7000/login", {
       //Aanpassen voor login API
-      method: "GET",
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
