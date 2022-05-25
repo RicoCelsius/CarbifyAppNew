@@ -1,5 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button, TextInput, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { useEffect, useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import News from "./News.js";
@@ -9,7 +17,7 @@ import News from "./News.js";
 export default function ScanScreen() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [text, setText] = useState("Not yet scanned");
+  const [text, setText] = useState("");
 
   // useEffect(() => {
   //   askPermissions();
@@ -54,7 +62,7 @@ export default function ScanScreen() {
     });
     let data = await response.json();
     console.log(data);
-    setScanned(false);
+    setScanned(false); //
   }
 
   return (
@@ -64,6 +72,7 @@ export default function ScanScreen() {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: "#56A5E0",
       }}
     >
       <View
@@ -86,8 +95,38 @@ export default function ScanScreen() {
             padding: 10,
             marginBottom: 10,
           }}
+          onChangeText={(newText) => setText(newText)}
         />
-        <Button title="Open camera" onPress={askPermissions} />
+        <TouchableOpacity
+          onPress={() => sendData(text)}
+          style={{
+            backgroundColor: "#C6724E",
+            width: "100%",
+            borderRadius: 25,
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 0,
+            marginBottom: 10,
+          }}
+        >
+          <Text>Confirm barcode</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={askPermissions}
+          style={{
+            backgroundColor: "#C6724E",
+            width: "100%",
+            borderRadius: 25,
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 0,
+            marginBottom: 10,
+          }}
+        >
+          <Text>Scan barcode</Text>
+        </TouchableOpacity>
         <StatusBar style="auto" />
       </View>
     </View>

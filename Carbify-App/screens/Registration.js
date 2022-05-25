@@ -78,7 +78,7 @@ export default class Registration extends React.Component {
           <TextInput
             style={styles.inputText}
             placeholder="Your email"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#FFFFFF"
             onChangeText={(text) => this.setState({ email: text })}
           />
         </View>
@@ -86,7 +86,7 @@ export default class Registration extends React.Component {
           <TextInput
             style={styles.inputText}
             placeholder="Username"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#FFFFFF"
             onChangeText={(text) => this.setState({ userName: text })}
           />
         </View>
@@ -95,7 +95,7 @@ export default class Registration extends React.Component {
             secureTextEntry
             style={styles.inputText}
             placeholder="Password"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#FFFFFF"
             onChangeText={(text) => this.setState({ password: text })}
           />
         </View>
