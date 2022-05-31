@@ -52,4 +52,14 @@ app.put('/update/:id', (req, res) => {
     })
 });
 
+app.post('/getbarcodeinfo', (req, res) => {
+    connection.query('SELECT * FROM items WHERE barcode = ?', [req.body.barcode], (error, result) => {
+        if (error) {
+            res.send('error to fetch barcode records')
+        } else {
+            res.send(result)
+        }
+    })
+})
+
 app.listen(7000);
