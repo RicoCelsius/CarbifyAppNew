@@ -12,8 +12,6 @@ import { useEffect, useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import News from "./News.js";
 
-//import Camera from "./screens/Camera.js";
-
 export default function ScanScreen() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -110,7 +108,7 @@ export default function ScanScreen() {
             marginBottom: 10,
           }}
         >
-          <Text>Confirm barcode</Text>
+          <Text style={{ color: "#FFFF" }}>Confirm barcode</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={askPermissions}
@@ -125,7 +123,7 @@ export default function ScanScreen() {
             marginBottom: 10,
           }}
         >
-          <Text>Scan barcode</Text>
+          <Text style={{ color: "#FFFF" }}>Scan barcode </Text>
         </TouchableOpacity>
         <StatusBar style="auto" />
       </View>

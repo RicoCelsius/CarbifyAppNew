@@ -47,8 +47,8 @@ export default class Login extends React.Component {
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            placeholder="Username..."
-            placeholderTextColor="#003f5c"
+            placeholder="Username"
+            placeholderTextColor="#FFFF"
             onChangeText={(text) => this.setState({ userName: text })}
           />
         </View>
@@ -56,21 +56,35 @@ export default class Login extends React.Component {
           <TextInput
             secureTextEntry
             style={styles.inputText}
-            placeholder="Password..."
-            placeholderTextColor="#003f5c"
+            placeholder="Password"
+            placeholderTextColor="#FFFF"
             onChangeText={(text) => this.setState({ password: text })}
           />
         </View>
         <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password?</Text>
+          <Text
+            style={styles.forgot}
+            onPress={() => {
+              this.props.navigation.navigate("Forgotpassword");
+            }}
+          >
+            Forgot Password?
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.loginBtn} onPress={this.login}>
           <Text style={styles.loginText} onPress={this.login}>
-            LOGIN
+            Login
           </Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={styles.loginText}>Signup</Text>
+          <Text
+            style={styles.loginText}
+            onPress={() => {
+              this.props.navigation.navigate("Registration");
+            }}
+          >
+            Signup
+          </Text>
         </TouchableOpacity>
       </View>
     );
