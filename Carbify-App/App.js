@@ -7,6 +7,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import News from "./screens/News.js";
 import Registration from "./screens/Registration.js";
 import Forgotpassword from "./screens/Forgotpassword.js";
+import Profile from "./screens/Profile.js";
 import { render } from "react-dom";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -31,6 +32,15 @@ export default function nav() {
           options={{
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="camera" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="account" color={color} size={26} />
             ),
           }}
         />

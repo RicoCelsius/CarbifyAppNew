@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default class Login extends React.Component {
+export default class Profile extends React.Component {
   state = {
     userName: "",
     password: "",
@@ -61,49 +61,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.logo}>Carbify</Text>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.inputText}
-            placeholder="Username"
-            placeholderTextColor="#FFFF"
-            onChangeText={(text) => this.setState({ userName: text })}
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            secureTextEntry
-            style={styles.inputText}
-            placeholder="Password"
-            placeholderTextColor="#FFFF"
-            onChangeText={(text) => this.setState({ password: text })}
-          />
-        </View>
-        <TouchableOpacity>
-          <Text
-            style={styles.forgot}
-            onPress={() => {
-              this.props.navigation.navigate("Forgotpassword");
-            }}
-          >
-            Forgot Password?
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn} onPress={this.login}>
-          <Text style={styles.loginText} onPress={this.login}>
-            Login
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text
-            style={styles.loginText}
-            onPress={() => {
-              this.props.navigation.navigate("Registration");
-            }}
-          >
-            Signup
-          </Text>
-        </TouchableOpacity>
+        <Text style={styles.logo}>Your profile</Text>
       </View>
     );
   }
@@ -114,13 +72,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#56A5E0",
     alignItems: "center",
-    justifyContent: "center",
   },
   logo: {
     fontWeight: "bold",
     fontSize: 50,
     color: "#C6724E",
     marginBottom: 40,
+    marginTop: 40,
   },
   inputView: {
     width: "80%",
