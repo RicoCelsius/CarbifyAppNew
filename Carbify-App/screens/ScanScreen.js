@@ -48,16 +48,19 @@ export default function ScanScreen() {
   }
 
   async function sendData(barcodedata) {
-    const response = await fetch("http://18.133.222.150:7000/getbarcodeinfo", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        barcode: barcodedata,
-      }),
-    });
+    const response = await fetch(
+      "http://Carbify.westeurope.azurecontainer.io:7000/getbarcodeinfo",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          barcode: barcodedata,
+        }),
+      }
+    );
     let data = await response.json();
     console.log(data);
     setScanned(false); //

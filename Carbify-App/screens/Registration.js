@@ -28,17 +28,20 @@ export default class Registration extends React.Component {
     } else if (this.state.password.length < 6) {
       alert("Password must be six characters in length");
     } else {
-      const response = await fetch("http://18.133.222.150:7000/getmail", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: this.state.email,
-          name: this.state.userName,
-        }),
-      });
+      const response = await fetch(
+        "http://Carbify.westeurope.azurecontainer.io:7000/getmail",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: this.state.email,
+            name: this.state.userName,
+          }),
+        }
+      );
       let data = await response.json();
       if (JSON.stringify(data) == "[]") {
         this.registerData();
@@ -52,11 +55,15 @@ export default class Registration extends React.Component {
   };
 
   registerData = async () => {
+    const salt =
+      "$2a$10$CwTscUXWue0Thq9St" + Math.random().toString(36).substr(2, 5);
     const hashedPassword = bcrypt.hashSync(
       this.state.password,
-      "$2a$10$CwTycUXWue0Thq9StjUM0u" //SALT, nodig voor encryption.. even uitzoeken hoe dit werkt met inloggen..
+      salt //SALT, nodig voor encryption.. even uitzoeken hoe dit werkt met inloggen..
     );
-    await fetch("http://18.133.222.150:7000/create", {
+    console.log(salt);
+
+    await fetch("http://Carbify.westeurope.azurecontainer.io:7000/create", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -66,6 +73,7 @@ export default class Registration extends React.Component {
         name: this.state.userName,
         email: this.state.email,
         password: hashedPassword,
+        salt: salt,
       }),
     });
   };

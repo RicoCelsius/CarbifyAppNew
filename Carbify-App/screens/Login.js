@@ -16,22 +16,43 @@ export default class Login extends React.Component {
   };
 
   login = async () => {
+    const response1 = await fetch(
+      "http://Carbify.westeurope.azurecontainer.io:7000/getsalt",
+      {
+        //Aanpassen voor login API
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: this.state.userName,
+        }),
+      }
+    );
+    let data1 = await response1.json();
+    console.log(data1[0]["salt"]);
+
     let hashedPassword = bcrypt.hashSync(
       this.state.password,
-      "$2a$10$CwTycUXWue0Thq9StjUM0u" //SALT, nodig voor encryption.. even uitzoeken hoe dit werkt met inloggen..
+      data1[0]["salt"] //SALT
     );
-    response = await fetch("http://18.133.222.150:7000/login", {
-      //Aanpassen voor login API
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: this.state.userName,
-        password: hashedPassword,
-      }),
-    });
+
+    const response = await fetch(
+      "http://Carbify.westeurope.azurecontainer.io:7000/login",
+      {
+        //Aanpassen voor login API
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: this.state.userName,
+          password: hashedPassword,
+        }),
+      }
+    );
     let data = await response.json();
     if (JSON.stringify(data) != "[]") {
       alert("Login succesful");
