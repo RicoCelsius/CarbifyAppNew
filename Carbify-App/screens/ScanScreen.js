@@ -34,6 +34,7 @@ export default function ScanScreen() {
     console.log(data);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     sendData(`${data}`);
+    this.props.navigation.navigate("Registration");
   };
   if (hasPermission) {
     console.log("Camera opened, permission true");

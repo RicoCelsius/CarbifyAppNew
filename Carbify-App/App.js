@@ -8,6 +8,7 @@ import News from "./screens/News.js";
 import Registration from "./screens/Registration.js";
 import Forgotpassword from "./screens/Forgotpassword.js";
 import Profile from "./screens/Profile.js";
+import CarbonInformation from "./screens/CarbonInformation.js";
 import { render } from "react-dom";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -35,7 +36,7 @@ export default function nav() {
             ),
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Profile"
           component={Profile}
           options={{
@@ -43,7 +44,7 @@ export default function nav() {
               <MaterialCommunityIcons name="account" color={color} size={26} />
             ),
           }}
-        />
+        /> */}
 
         <Tab.Screen
           name="Registration"
@@ -54,15 +55,17 @@ export default function nav() {
             ),
           }}
         />
-        {/* <Tab.Screen
-          name="Forgotpassword"
-          component={Forgotpassword}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="camera" color={color} size={26} />
-            ),
-          }}
-        /> */}
+        {
+          <Tab.Screen
+            name="CarbonInformation"
+            component={CarbonInformation}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <MaterialCommunityIcons name="camera" color={color} size={26} />
+              ),
+            }}
+          />
+        }
         <Tab.Screen
           name="Login"
           component={Login}
