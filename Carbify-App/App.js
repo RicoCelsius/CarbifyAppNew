@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+
 import ScanScreen from "./screens/ScanScreen.js";
 import Login from "./screens/Login.js";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
@@ -10,6 +11,9 @@ import Forgotpassword from "./screens/Forgotpassword.js";
 import Profile from "./screens/Profile.js";
 import CarbonInformation from "./screens/CarbonInformation.js";
 import { render } from "react-dom";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -27,6 +31,17 @@ export default function nav() {
           paddingVertical: 10,
         }}
       >
+        <Stack.Screen
+          name="CarbonInformation"
+          component={CarbonInformation}
+          options={{
+            drawerLabel: () => null,
+            title: null,
+            drawerIcon: () => null,
+            drawerItemStyle: { display: "none" },
+          }}
+        ></Stack.Screen>
+
         <Tab.Screen
           name="Scan"
           component={ScanScreen}
@@ -36,7 +51,7 @@ export default function nav() {
             ),
           }}
         />
-        {/* <Tab.Screen
+        <Tab.Screen
           name="Profile"
           component={Profile}
           options={{
@@ -44,7 +59,7 @@ export default function nav() {
               <MaterialCommunityIcons name="account" color={color} size={26} />
             ),
           }}
-        /> */}
+        />
 
         <Tab.Screen
           name="Registration"
@@ -56,15 +71,13 @@ export default function nav() {
           }}
         />
         {
-          <Tab.Screen
-            name="CarbonInformation"
-            component={CarbonInformation}
-            options={{
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="camera" color={color} size={26} />
-              ),
-            }}
-          />
+          // <Tab.Screen
+          //   name="CarbonInformation"
+          //   component={CarbonInformation}
+          //   options={{
+          //     tabBarStyle: { display: "none" },
+          //   }}
+          // />
         }
         <Tab.Screen
           name="Login"

@@ -11,12 +11,14 @@ import {
 import { useEffect, useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import News from "./News.js";
+import CarbonInformation from "./CarbonInformation.js";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ScanScreen() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("");
-
+  const navigation = useNavigation();
   // useEffect(() => {
   //   askPermissions();
   // }, []);
@@ -34,7 +36,7 @@ export default function ScanScreen() {
     console.log(data);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     sendData(`${data}`);
-    this.props.navigation.navigate("Registration");
+    navigation.navigate("CarbonInformation");
   };
   if (hasPermission) {
     console.log("Camera opened, permission true");
