@@ -4,7 +4,7 @@ import ScanScreen from "./screens/ScanScreen.js";
 import Login from "./screens/Login.js";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import News from "./screens/News.js";
+// import News from "./screens/News.js";
 import Registration from "./screens/Registration.js";
 import Forgotpassword from "./screens/Forgotpassword.js";
 import Profile from "./screens/Profile.js";

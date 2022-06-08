@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import News from "./News.js";
+// import News from "./News.js";
 import CarbonInformation from "./CarbonInformation.js";
 import { useNavigation } from "@react-navigation/native";
 
