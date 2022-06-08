@@ -9,9 +9,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useEffect, useState } from "react";
+import { NavigationEvents } from "react-navigation";
 import { BarCodeScanner } from "expo-barcode-scanner";
 // import News from "./News.js";
-import CarbonInformation from "./CarbonInformation.js";
+
 import { useNavigation } from "@react-navigation/native";
 
 export default function ScanScreen() {
@@ -19,9 +20,22 @@ export default function ScanScreen() {
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("");
   const navigation = useNavigation();
+  const [textName, setNameText] = useState("");
+
   // useEffect(() => {
   //   askPermissions();
   // }, []);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      console.log("hi");
+      // do something - for example: reset states, ask for camera permission
+      setScanned(false);
+      setHasPermission(false);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   const askPermissions = () => {
     (async () => {
@@ -34,9 +48,7 @@ export default function ScanScreen() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     console.log(data);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     sendData(`${data}`);
-    navigation.navigate("CarbonInformation");
   };
   if (hasPermission) {
     console.log("Camera opened, permission true");
@@ -65,7 +77,14 @@ export default function ScanScreen() {
       }
     );
     let data = await response.json();
+
+    navigation.navigate("CarbonInformation", {
+      name: data[0]["productName"],
+      carbon: data[0]["carbonOffset"],
+      category: data[0]["category"],
+    });
     console.log(data);
+
     setScanned(false); //
   }
 

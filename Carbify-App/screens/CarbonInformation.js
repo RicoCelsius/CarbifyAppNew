@@ -1,6 +1,9 @@
 //import libraries
 import React, { useState, useEffect } from "react";
 import bcrypt from "bcryptjs";
+import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
+
 import {
   StyleSheet,
   Text,
@@ -8,20 +11,24 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { fontSize } from "styled-system";
+import ScanScreen from "./ScanScreen";
 
-export default class CarbonInformation extends React.Component {
-  state = {
-    userName: "",
-    password: "",
-  };
+export default function CarbonInformation({ route }) {
+  const textsize = 25;
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.logo}>Your profile</Text>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.logo}>Product information</Text>
+      <View>
+        <Text style={{ fontSize: textsize }}>
+          Name: {route.params.name} {"\n"}
+          Carbon: {route.params.carbon}
+          {"\n"}Category: {route.params.category}
+        </Text>
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -37,6 +44,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     marginTop: 40,
   },
+  innerText: { fontSize: 8, height: 20 },
   inputView: {
     width: "80%",
     backgroundColor: "#444442",
