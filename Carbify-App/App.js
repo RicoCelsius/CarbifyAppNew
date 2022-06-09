@@ -59,6 +59,7 @@ export default function nav() {
           <Tab.Screen
             name="CarbonInformation"
             component={CarbonInformation}
+            initialParams={{ name: "" }}
             options={{
               tabBarStyle: { display: "none" },
             }}

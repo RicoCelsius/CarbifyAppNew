@@ -37,6 +37,15 @@ export default function ScanScreen() {
     return unsubscribe;
   }, [navigation]);
 
+  function catchError(error) {
+    if (error instanceof TypeError) {
+      alert("Item is not available in the database");
+    } else if (error instanceof Error) {
+      alert("Connection error:"`${error}`);
+    }
+    setScanned(false);
+  }
+
   const askPermissions = () => {
     (async () => {
       console.log("Asking for permissions");
@@ -48,7 +57,7 @@ export default function ScanScreen() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     console.log(data);
-    sendData(`${data}`);
+    sendData(`${data}`).catch((error) => catchError(error));
   };
   if (hasPermission) {
     console.log("Camera opened, permission true");
@@ -56,7 +65,7 @@ export default function ScanScreen() {
       <View>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
+          style={{ height: "100%", width: "100%" }}
         />
       </View>
     );
@@ -121,7 +130,7 @@ export default function ScanScreen() {
           onChangeText={(newText) => setText(newText)}
         />
         <TouchableOpacity
-          onPress={() => sendData(text)}
+          onPress={() => sendData(text).catch((error) => catchError(error))}
           style={{
             backgroundColor: "#C6724E",
             width: "100%",
