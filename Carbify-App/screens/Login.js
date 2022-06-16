@@ -13,6 +13,7 @@ export default class Login extends React.Component {
   state = {
     userName: "",
     password: "",
+    userId: "",
   };
 
   login = async () => {
@@ -51,8 +52,15 @@ export default class Login extends React.Component {
       }),
     });
     let data = await response.json();
+    this.userId = data[0]["id"];
+    console.log(data);
+    console.log(this.userId);
     if (JSON.stringify(data) != "[]") {
       alert("Login succesful");
+
+      this.props.navigation.navigate("Profile", {
+        data: this.userId,
+      });
     } else {
       alert("Login failed");
     }

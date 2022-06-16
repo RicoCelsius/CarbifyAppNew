@@ -11,57 +11,19 @@ import {
 
 export default class Profile extends React.Component {
   state = {
-    userName: "",
-    password: "",
-  };
-
-  login = async () => {
-    const response1 = await fetch(
-      "http://Carbify.westeurope.azurecontainer.io:7000/getsalt",
-      {
-        //Aanpassen voor login API
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: this.state.userName,
-        }),
-      }
-    );
-    let data1 = await response1.json();
-    console.log(data1[0]["salt"]);
-
-    let hashedPassword = bcrypt.hashSync(
-      this.state.password,
-      data1[0]["salt"] //SALT
-    );
-
-    const response = await fetch("http://18.133.222.150:7000/login", {
-      //Aanpassen voor login API
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: this.state.userName,
-        password: hashedPassword,
-      }),
-    });
-    let data = await response.json();
-    if (JSON.stringify(data) != "[]") {
-      alert("Login succesful");
-    } else {
-      alert("Login failed");
-    }
+    userId: "",
   };
 
   render() {
+    if (typeof this.props.route.params != "undefined")
+      this.userId =
+        "Your userid is " + JSON.stringify(this.props.route.params.data);
+    else this.userId = "Please login to see your personal profile";
+
     return (
       <View style={styles.container}>
         <Text style={styles.logo}>Your profile</Text>
+        <Text>{this.userId}</Text>
       </View>
     );
   }
