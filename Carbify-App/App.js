@@ -5,6 +5,7 @@ import Login from "./screens/Login.js";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 // import News from "./screens/News.js";
+import GifImage from "@lowkey/react-native-gif";
 import Registration from "./screens/Registration.js";
 import Forgotpassword from "./screens/Forgotpassword.js";
 import Profile from "./screens/Profile.js";
@@ -32,7 +33,11 @@ export default function nav() {
           component={ScanScreen}
           options={{
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="camera" color={color} size={26} />
+              <MaterialCommunityIcons
+                name="barcode-scan"
+                color={color}
+                size={23}
+              />
             ),
           }}
         />
@@ -61,7 +66,13 @@ export default function nav() {
             component={CarbonInformation}
             initialParams={{ name: "" }}
             options={{
-              tabBarStyle: { display: "none" },
+              tabBarIcon: ({ color }) => (
+                <MaterialCommunityIcons
+                  name="information"
+                  color={color}
+                  size={24}
+                />
+              ),
             }}
           />
         }
